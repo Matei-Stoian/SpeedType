@@ -3,14 +3,14 @@ import ToolTip from './ToolTip';
 
 const Footer = () => {
     return (
-        <footer className="mb-3 mt-auto">
-            <div className="flex flex-grid gap-6 items-center justify-center ">
+        <footer className="py-96 mb-3 mt-auto">
+            <div className="flex flex-grid gap-6 items-center justify-start ">
                 <ToolTip tooltipId="GithubToolTip">
                     <a href='https://github.com/Matei-Stoian' target="_blank" rel="noopener noreferrer">
                     <BsGithub
                         data-tooltip-id='GithubToolTip'
                         data-tooltip-content="Github"
-                        className='text-5xl ease-linear duration-300 hover:text-green-500' />
+                        className='text-4xl ease-linear duration-300 hover:text-green-500' />
                     </a>
                 
                 </ToolTip>
@@ -19,7 +19,7 @@ const Footer = () => {
                     <BsLinkedin
                         data-tooltip-id='LinkedinToolTip'
                         data-tooltip-content="Linkedin"
-                        className='text-5xl ease-linear duration-300 hover:text-green-500' />
+                        className='text-4xl ease-linear duration-300 hover:text-green-500' />
                     </a>
                 </ToolTip>
             </div>

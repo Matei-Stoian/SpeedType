@@ -12,12 +12,15 @@ function App() {
   const [focused,setFocus] = useState();
   return (
     <>
+    <div className='px-80  h-screen w-full overflow-y-auto'>
+
       <Header/>
       <Counter counter={100000} reset={()=>{return 1000;}}/>
       <WordContainer word={word} />
       
       
       <Footer />
+    </div>
     </>
   )
 }

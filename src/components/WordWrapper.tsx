@@ -14,7 +14,7 @@ const WordWrapper = ({children,focused,setFocus}: WordWrapperProps) =>{
     return(<>
     
     <div 
-        className={`relative mt-7 focus:border-0 focus:border-none focus:outline-none ${focused? 'blur-none' : 'cursor-pointer blur-md'}`}
+        className={`relative  focus:border-0 focus:border-none focus:outline-none ${focused? 'blur-none' : 'cursor-pointer blur-md'}`}
         onFocus={()=>setFocus(true)}
         onBlur={()=>setFocus(false)}
         >
