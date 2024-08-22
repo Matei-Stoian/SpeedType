@@ -3,13 +3,20 @@ import Character from './components/Charachter'
 import WordContainer from './components/WordContainer'
 import { useGame } from './hooks/useGame';
 import { getWord } from './utils';
+import WordWrapper from './components/WordWrapper'
+import { useState } from 'react';
+import Counter from './components/Conter'
+import Header from './components/Header'
 function App() {
   const word = getWord(30);
+  const [focused,setFocus] = useState();
   return (
     <>
-      <div className='relative mt-5 focus:border-0 focus:border-none focus:outline-none'>
+      <Header/>
+      <Counter counter={100000} reset={()=>{return 1000;}}/>
       <WordContainer word={word} />
-      </div>
+      
+      
       <Footer />
     </>
   )
