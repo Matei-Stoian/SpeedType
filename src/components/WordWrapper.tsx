@@ -1,5 +1,5 @@
 import React from "react";
-import { MdCenterFocusStrong } from "react-icons/md";
+
 
 
 interface WordWrapperProps {

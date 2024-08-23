@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { setLocalStorage } from '../utils/localStorage'
 import {BiTimer } from 'react-icons/bi';
 

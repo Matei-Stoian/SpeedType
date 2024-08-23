@@ -1,5 +1,3 @@
-
-import React from 'react';
 import ToolTip from './ToolTip'
 import { MdRestartAlt } from 'react-icons/md';
 

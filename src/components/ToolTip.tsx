@@ -20,7 +20,8 @@ const Tooltip = ({
       {children}
       <ReactTooltip
         id={tooltipId}
-        
+        delayHide={delayHide}
+        delayShow={delayShow}
       />
     </>
   );
