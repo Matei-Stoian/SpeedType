@@ -21,10 +21,11 @@ const Counter = ({ counter, reset }: CounterProps) => {
     };
 
     return (
-        <div className="flex justify-end">
+        <div className="flex justify-end mb-10">
             <div
 
-                className=" rounded-lg p-3 bg-slate-800"
+                className=" rounded-lg p-3"
+                style={{background: "rgb(15 38 51)"}}
             >
                 <span className="text-right text-emerald-400 font-mono text-lg lg:text-xl">
                     {formatCounter.minutes < 10

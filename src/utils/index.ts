@@ -1,9 +1,12 @@
 import { faker } from '@faker-js/faker'
+import wordList from '../static/english_10k.json'
+import {Metrics} from '../types'
 
-import { Metrics } from '../types'
+
+
 
 export const getWord = (n: number): string => {
-    return faker.word.words(n);
+    return Array.from({length:n},()=> faker.helpers.arrayElement(wordList.words)).join(' ');
 }
 
 export const checkCode = (code: string) => {

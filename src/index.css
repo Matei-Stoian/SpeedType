@@ -4,5 +4,21 @@
 
 
 body{
-  @apply bg-gray-900;
+  background-color: rgb(1, 25, 38);
+}
+
+
+.category{
+  @apply cursor-pointer rounded-md p-2 font-mono text-xl;
+}
+
+@layer components {
+  .character:last-child::after {
+    content: '';
+    width: 2px;
+    height: 24px;
+    margin-bottom: -2px;
+    display: inline-block;
+    animation: cursorBlink 0.65s steps(2) infinite;
+  }
 }
