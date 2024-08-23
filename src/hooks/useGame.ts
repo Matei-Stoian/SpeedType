@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react"
-import { Result } from "../types"
+import { useCallback, useEffect, useState } from "react"
+import { ResultType } from "../types"
 import { useWords } from "./useWords";
 import { useKeyDown } from "./useKeyDown";
 import { setLocalStorage, getLocalStorage } from "../utils/localStorage";
@@ -8,12 +8,13 @@ import { computeAccuracy, computeErrorPercentage, computeWPM } from "../utils";
 
 export const useGame = () => {
 
-    const [result, setResult] = useState<Result>({
+    const [result, setResult] = useState<ResultType>({
         accuracy: 0,
         wpm: 0,
         cpm: 0,
         error: 0,
     });
+    const [isFinished,setFinished] = useState(false);
     const [wordContainerFocused, setWordConteinerFocused] = useState(false);
     const { word, updateWord, totalWords } = useWords(30);
     const [time, setTime] = useState(() => getLocalStorage('time') || 15000);
@@ -53,36 +54,42 @@ export const useGame = () => {
         }
     }, [charTyped, word]);
 
+    // Use useEffect to handle updates based on dependencies
+    useEffect(() => {
+        if (word.length === charTyped.length) {
+            updateWord();
+            resetCharTyped();
+            resetCursorPointer();
+        }
+    }, [charTyped, word, updateWord, resetCharTyped, resetCursorPointer]);
 
-    if (word.length === charTyped.length) {
-        updateWord();
-        resetCharTyped();
-        resetCursorPointer();
-    }
+    useEffect(() => {
+        if (typingState === 'start') {
+            startCounter();
+            setTypingState('typing');
+        }
+    }, [typingState, startCounter, setTypingState]);
 
-    if (typingState === 'start') {
-        startCounter();
-        setTypingState('typing');
-    }
+    useEffect(() => {
+        if (counter === 0) {
+            const { accuracy } = computeAccuracy(totalWords, totalCharacterTyped);
+            const { wpm, cpm } = computeWPM(totalCharacterTyped, accuracy, time);
+            const error = computeErrorPercentage(accuracy);
+            setFinished(true);
+            setWordConteinerFocused(false);
+            setResult({
+                accuracy,
+                wpm,
+                cpm,
+                error,
+            });
 
-
-    if (counter === 0) {
-        const { accuracy } = computeAccuracy(totalWords, totalCharacterTyped);
-        const { wpm, cpm } = computeWPM(totalCharacterTyped, accuracy, time);
-        const error = computeErrorPercentage(accuracy);
-
-
-        setResult({
-            accuracy,
-            wpm,
-            cpm,
-            error,
-        });
-
-        resetGame();
-    }
-
+            resetGame();
+        }
+    }, [counter, totalWords, totalCharacterTyped, time, resetGame]);
     return {
+        isFinished,
+        setFinished,
         charTyped,
         counter,
         cursorPosition,

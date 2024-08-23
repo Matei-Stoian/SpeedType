@@ -16,16 +16,16 @@ const TimePicker = ({ time, setTime, reset }: TimePickerProps) => {
             <BiTimer className='text-3xl text-slate-600'/>
             <div className="flex gap-4 rounded-lg text-slate-600" style={{background: "rgb(0, 29, 46)"}}>
                 <span
-                    className={`category ${time === 15000 ? 'font-bold underline text-emerald-400' : ''}`}
+                    className={`category ${time === 15000 ? 'font-bold underline text-emerald-400 hover:text-emerald-200' : 'hover:text-slate-200'}`}
                     onClick={() => {
                         setTime(15000);
-                        setLocalStorage('time', 1500);
+                        setLocalStorage('time', 15000);
                         reset();
                     }}
                 >15s
                 </span>
                 <span
-                    className={`category ${time === 30000 ? 'font-bold underline text-emerald-400' : ''}`}
+                    className={`category ${time === 30000 ? 'font-bold underline text-emerald-400 hover:text-emerald-200' : 'hover:text-slate-200'}`}
                     onClick={() => {
                         setTime(30000);
                         setLocalStorage('time', 30000);
@@ -34,7 +34,7 @@ const TimePicker = ({ time, setTime, reset }: TimePickerProps) => {
                 >30s
                 </span>
                 <span
-                    className={`category ${time === 60000 ? 'font-bold underline text-emerald-400' : ''}`}
+                    className={`category ${time === 60000 ? 'font-bold underline text-emerald-400 hover:text-emerald-200' : 'hover:text-slate-200'}`}
                     onClick={() => {
                         setTime(60000);
                         setLocalStorage('time', 60000);

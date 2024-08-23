@@ -5,7 +5,7 @@ export interface Metrics{
 }
 
 
-export interface Result{
+export type ResultType = {
     accuracy:number;
     cpm:number;
     wpm:number;

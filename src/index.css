@@ -22,3 +22,9 @@ body{
     animation: cursorBlink 0.65s steps(2) infinite;
   }
 }
+
+@keyframes cursorBlink {
+  0% {
+    opacity: 0;
+  }
+}

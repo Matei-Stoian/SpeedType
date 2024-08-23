@@ -9,59 +9,61 @@ type TypingState = 'idle' | 'start' | 'typing';
 export const useKeyDown = (active: boolean) => {
     const [typingState, setTypingState] = useState<TypingState>('idle');
     const [charTyped, setCharTyped] = useState<string>('');
-    const [totalCharacterTyped, setTotalCharacterTyped] = useState<string>('')
+    const [totalCharacterTyped, setTotalCharacterTyped] = useState<string>('');
 
-    const { cursorPosition, updateCursorPosition, resetCursorPointer } = useCursorPosition();
+    const { cursorPosition, updateCursorPosition, resetCursorPointer } =
+        useCursorPosition();
 
+    const handleKeyDown = useCallback(
+        ({ key, code }: KeyboardEvent) => {
+            if (!active || !checkCode(code)) return;
 
-
-    const handleKeyDown = useCallback(({ key, code }: KeyboardEvent) => {
-
-        if (!active || !checkCode(code))
-            return;
-
-        if (key === 'Backspace') {
-            if (charTyped.length > 0 && cursorPosition > 0) {
-                setCharTyped((prev) => prev.slice(0, charTyped.length - 1));
-                setTotalCharacterTyped((prev) =>
-                    prev.slice(0, totalCharacterTyped.length - 1)
-                );
-                updateCursorPosition('decrease');
+            if (key === 'Backspace') {
+                if (charTyped.length > 0 && cursorPosition > 0) {
+                    setCharTyped((prev) => prev.slice(0, charTyped.length - 1));
+                    setTotalCharacterTyped((prev) =>
+                        prev.slice(0, totalCharacterTyped.length - 1)
+                    );
+                    updateCursorPosition('decrease');
+                }
+                return;
             }
-            return;
-        }
 
-        if (typingState === 'idle') {
-            setTypingState('start');
-        }
+            if (typingState === 'idle') {
+                setTypingState('start');
+            }
 
-        setCharTyped((prev) => prev + key);
-        setTotalCharacterTyped((prev) => prev + key);
-        updateCursorPosition('increase');
-    }, [active,
-        charTyped.length,
-        cursorPosition,
-        updateCursorPosition,
-        typingState,
-        totalCharacterTyped,]);
-
-        const resetCharTyped = useCallback(()=>{
-            setCharTyped('');
-        },[setCharTyped]);
-
-        useEffect(()=>{
-            window.addEventListener('keydown',handleKeyDown);
-            return () => window.removeEventListener('keydown',handleKeyDown);
-        },[]);
-
-        return {
-            charTyped,
-            totalCharacterTyped,
-            setTotalCharacterTyped,
+            setCharTyped((prev) => prev + key);
+            setTotalCharacterTyped((prev) => prev + key);
+            updateCursorPosition('increase');
+        },
+        [
+            active,
+            charTyped.length,
             cursorPosition,
-            resetCharTyped,
-            resetCursorPointer,
+            updateCursorPosition,
             typingState,
-            setTypingState,
-        };
-}
+            totalCharacterTyped,
+        ]
+    );
+
+    const resetCharTyped = useCallback(() => {
+        setCharTyped('');
+    }, [setCharTyped]);
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    });
+
+    return {
+        charTyped,
+        totalCharacterTyped,
+        setTotalCharacterTyped,
+        cursorPosition,
+        resetCharTyped,
+        resetCursorPointer,
+        typingState,
+        setTypingState,
+    };
+};
