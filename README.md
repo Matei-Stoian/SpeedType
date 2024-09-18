@@ -12,6 +12,10 @@ SpeedType is a fast and fun typing speed test application built with React.js. W
 
 ## 🖥️ Screenshots
 
+<img src="public/Screenshot 2024-09-19 000717.png" alt="SpeedType Screenshot" width="400"/> 
+
+<img src="public/Screenshot 2024-09-19 000807.png" alt="SpeedType Screenshot" width="400"/>
+
 ## 📦 Installation
 
 **Prerequisites**
